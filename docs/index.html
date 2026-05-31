@@ -299,74 +299,98 @@ const Stars = ({ score, size = "w-4 h-4" }) => (
     {[1,2,3,4,5].map(i => <Icon key={i} name={i <= score ? "star" : "starEmpty"} className={`${size} ${i <= score ? "text-amber-400" : "text-slate-200"}`} />)}
   </span>
 );
-
 // ═══════════════════════════════════════════════════════════
-//  AI CHATBOT
+//  ENHANCED AI KNOWLEDGE BASE (50+ Topics)
 // ═══════════════════════════════════════════════════════════
-const AIChat = ({ open, onClose }) => {
-  const [msgs, setMsgs] = useState([{ id: 0, role: "ai", text: "👋 Hello! I'm **Edufana AI**, your intelligent tutor.\n\nI can help you with:\n• 📚 **CBC, 8-4-4, British** curricula\n• 🔬 Sciences, Maths, Languages\n• 💼 Career guidance\n• 📝 Study tips\n\nWhat would you like to learn?" }]);
-  const [input, setInput] = useState("");
-  const [typing, setTyping] = useState(false);
-  const bottomRef = useRef(null);
-  useEffect(() => { bottomRef.current?.scrollIntoView({ behavior: "smooth" }); }, [msgs]);
+const AI_KB = [
+  // ── GREETINGS & IDENTITY ──
+  { keys: ["hello", "hi", "hey", "greet", "good morning", "good afternoon"],
+    response: "👋 Hello there! I'm **Edufana AI**, your intelligent learning companion.\n\nI'm trained on:\n🇰🇪 **CBC Curriculum** (Kenya)\n🇰🇪 **8-4-4 System** (Kenya)\n🇬🇧 **British Baccalaureate** (UK)\n\nI can help you with:\n• 📚 Any subject from all three curricula\n• 🌍 8 foreign languages\n• 💼 Career guidance\n• 📝 Study strategies\n• 🧮 Math problem solving\n\n**What are you learning today?**" },
 
-  const send = () => {
-    if (!input.trim()) return;
-    const userMsg = { id: Date.now(), role: "user", text: input };
-    const query = input;
-    setInput("");
-    setMsgs(p => [...p, userMsg]);
-    setTyping(true);
-    setTimeout(() => {
-      const aiMsg = { id: Date.now()+1, role: "ai", text: getAIResponse(query) };
-      setMsgs(p => [...p, aiMsg]);
-      setTyping(false);
-    }, 700);
-  };
+  { keys: ["who are you", "what are you", "your name"],
+    response: "🤖 I'm **Edufana AI** — an intelligent tutor built to help students across three curricula.\n\n**My capabilities:**\n✅ Answer questions on any school subject\n✅ Explain complex concepts simply\n✅ Create study plans\n✅ Give career advice\n✅ Teach foreign languages\n✅ Help with homework\n✅ Prepare you for exams (KCPE, KCSE, GCSE, A-Levels)\n\nI'm like having a personal teacher available 24/7! What would you like to explore?" },
 
-  if (!open) return null;
-  return (
-    <div className="fixed bottom-4 right-4 z-50 w-80 sm:w-96 bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden flex flex-col" style={{maxHeight: "550px"}}>
-      <div className="bg-gradient-to-r from-violet-600 via-purple-600 to-indigo-600 p-4 text-white flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <div className="w-9 h-9 bg-white/20 rounded-xl flex items-center justify-center text-lg">🤖</div>
-          <div>
-            <div className="font-semibold">Edufana AI Tutor</div>
-            <div className="text-[10px] text-white/70 flex items-center gap-1"><span className="w-1.5 h-1.5 bg-emerald-400 rounded-full"></span>Online · CBC · 8-4-4 · British</div>
-          </div>
-        </div>
-        <button onClick={onClose} className="text-white/80 hover:text-white"><Icon name="close" className="w-4 h-4" /></button>
-      </div>
-      <div className="flex-1 p-3 overflow-y-auto space-y-3 bg-gradient-to-b from-slate-50/50 to-white" style={{minHeight: "350px"}}>
-        {msgs.map(m => (
-          <div key={m.id} className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}>
-            <div className={`max-w-[85%] px-4 py-2.5 rounded-2xl text-sm leading-relaxed whitespace-pre-line ${m.role === "user" ? "bg-violet-600 text-white rounded-br-md" : "bg-white border border-slate-100 text-slate-700 rounded-bl-md shadow-sm"}`}>
-              {m.text.split('**').map((part, i) => i % 2 === 1 ? <strong key={i}>{part}</strong> : <span key={i}>{part}</span>)}
-            </div>
-          </div>
-        ))}
-        {typing && (
-          <div className="flex justify-start">
-            <div className="bg-white border border-slate-100 rounded-2xl rounded-bl-md px-4 py-3 shadow-sm">
-              <div className="flex gap-1">
-                <span className="w-2 h-2 bg-slate-400 rounded-full animate-bounce" style={{animationDelay:'0ms'}}></span>
-                <span className="w-2 h-2 bg-slate-400 rounded-full animate-bounce" style={{animationDelay:'150ms'}}></span>
-                <span className="w-2 h-2 bg-slate-400 rounded-full animate-bounce" style={{animationDelay:'300ms'}}></span>
-              </div>
-            </div>
-          </div>
-        )}
-        <div ref={bottomRef} />
-      </div>
-      <div className="p-3 border-t border-slate-100 flex gap-2 bg-white">
-        <input value={input} onChange={e => setInput(e.target.value)} onKeyDown={e => e.key === "Enter" && send()}
-          placeholder="Ask about any topic..." className="flex-1 px-4 py-2 rounded-xl border border-slate-200 focus:border-violet-400 outline-none text-sm" />
-        <button onClick={send} className="bg-gradient-to-r from-violet-600 to-indigo-600 text-white p-2.5 rounded-xl hover:from-violet-700 hover:to-indigo-700 transition"><Icon name="send" className="w-4 h-4" /></button>
-      </div>
-    </div>
-  );
-};
+  // ── CURRICULA EXPLANATIONS ──
+  { keys: ["cbc", "competency based", "kenya curriculum 2017", "new curriculum"],
+    response: "🇰🇪 **CBC — Competency-Based Curriculum**\n\nIntroduced in 2017 to replace 8-4-4. Focuses on developing **competencies** (skills, values, knowledge) rather than just passing exams.\n\n**Structure: 2-6-3-3-3**\n• 2 years Pre-Primary (PP1-PP2)\n• 6 years Lower & Upper Primary (Grade 1-6)\n• 3 years Junior Secondary (Grade 7-9)\n• 3 years Senior Secondary (Grade 10-12)\n\n**Key Features:**\n• Continuous assessment (not just final exams)\n• Pathways in Senior Secondary:\n  - 🎨 Arts & Sports\n  - 🔬 STEM\n  - 📊 Social Sciences\n• Parental involvement required\n• Values-based learning\n\n**Assessment:**\n• Formative (ongoing)\n• Summative (end of level)\n• National assessments at Grade 6, 9, 12\n\nWould you like me to explain a specific CBC subject or grade level?" },
 
+  { keys: ["844", "8-4-4", "old kenya system", "former system", "kcpe", "kcse"],
+    response: "🇰🇪 **The 8-4-4 System (1985-2017)**\n\nKenya's former education structure, still used by many schools during CBC transition.\n\n**Structure:**\n• 8 years Primary (Standard 1-8)\n• 4 years Secondary (Form 1-4)\n• 4 years University\n\n**Key Exams:**\n• **KCPE** — Kenya Certificate of Primary Education (end of Std 8)\n• **KCSE** — Kenya Certificate of Secondary Education (end of Form 4)\n\n**Subjects (up to 13):**\nMath, English, Kiswahili, Biology, Chemistry, Physics, History, Geography, CRE/IRE/HRE, Agriculture, Business Studies, Computer Studies, Home Science, plus electives.\n\n**Grading (KCSE):**\nA (80-100), A- (75-79), B+ (70-74), B (65-69), B- (60-64), C+ (55-59), C (50-54), C- (45-49), D+ (40-44), D (35-39), D- (30-34), E (0-29)\n\nStill relevant? Many resources and past papers are based on 8-4-4. Want help with a specific subject?" },
+
+  { keys: ["british", "uk", "gcse", "a-level", "key stage", "igcse"],
+    response: "🇬🇧 **British Baccalaureate System**\n\nUsed in the UK and international schools worldwide.\n\n**Key Stages:**\n\n🔹 **Early Years Foundation Stage** (Ages 3-5)\n\n🔹 **Key Stage 1** (Year 1-2, Ages 5-7)\n   Core: English, Maths, Science\n\n🔹 **Key Stage 2** (Year 3-6, Ages 7-11)\n   Adds: History, Geography, Art, Music, PE\n\n🔹 **Key Stage 3** (Year 7-9, Ages 11-14)\n   Broad subject range, prepares for GCSEs\n\n🔹 **Key Stage 4 / GCSE** (Year 10-11, Ages 14-16)\n   National exams in 8-10 subjects\n   Grades: 9 (highest) to 1\n\n🔹 **Key Stage 5 / A-Levels** (Year 12-13, Ages 16-18)\n   Students choose 3-4 subjects\n   University entry qualification\n\n**Top Exam Boards:**\n• AQA, Edexcel, OCR, Cambridge (CAIE)\n\n**Grading:**\n• GCSE: 9-1 (9 = A**, 4 = C pass)\n• A-Level: A*, A, B, C, D, E\n\nWant me to explain a specific stage or subject?" },
+
+  // ── MATHEMATICS ──
+  { keys: ["pythagoras", "pythagorean", "right triangle hypotenuse"],
+    response: "📐 **Pythagoras' Theorem**\n\n**The Rule:** In a right-angled triangle:\n\n$$a² + b² = c²$$\n\nWhere **c** is the hypotenuse (longest side, opposite the right angle).\n\n**Example:**\nIf a = 3 and b = 4:\nc² = 3² + 4² = 9 + 16 = 25\nc = √25 = **5**\n\n**Finding a shorter side:**\na² = c² - b²\n\n**Pythagorean Triples** (memorize these!):\n• (3, 4, 5)\n• (5, 12, 13)\n• (7, 24, 25)\n• (8, 15, 17)\n• (9, 40, 41)\n\n**Real-world uses:**\n🏗️ Construction (checking corners are square)\n️ Navigation & GPS\n Video game graphics\n Measuring distances\n\n**Exam Tip:** Always identify the hypotenuse FIRST — it's always opposite the right angle and always the longest side.\n\nWant me to walk through a practice problem?" },
+
+  { keys: ["quadratic", "quadratic equation", "factorise", "factorize"],
+    response: "🔢 **Quadratic Equations**\n\n**Standard form:** ax² + bx + c = 0\n\n**Three methods to solve:**\n\n**1️⃣ Factorization**\nx² + 5x + 6 = 0\n(x + 2)(x + 3) = 0\nx = -2 or x = -3\n\n**2️⃣ Quadratic Formula** (works always!)\nx = (-b ± √(b²-4ac)) / 2a\n\n**3️⃣ Completing the Square**\nx² + 6x + 5 = 0\n(x + 3)² - 9 + 5 = 0\n(x + 3)² = 4\nx = -3 ± 2 → x = -1 or x = -5\n\n**The Discriminant (b²-4ac):**\n• > 0: Two real roots\n• = 0: One repeated root\n• < 0: No real roots (complex)\n\n**Exam tip:** Try factorizing first (fastest), use the formula if it doesn't factorize easily.\n\nWant a practice question?" },
+
+  { keys: ["algebra", "equation", "solve for x", "variable"],
+    response: "🔢 **Algebra Fundamentals**\n\n**Golden Rule:** Whatever you do to one side, do to the other!\n\n**Step-by-step approach:**\n1. Simplify both sides\n2. Move variables to one side\n3. Move constants to the other\n4. Isolate the variable\n\n**Example:**\n3x + 7 = 2x + 15\n3x - 2x = 15 - 7\nx = 8 ✓\n\n**Common patterns:**\n• **Linear:** ax + b = c → one solution\n• **Quadratic:** ax² + bx + c = 0 → up to 2 solutions\n• **Simultaneous:** 2 equations, 2 unknowns\n\n**Pro tips:**\n✅ Always check your answer by substituting back\n✅ Watch for sign errors (most common mistake!)\n✅ Use brackets to avoid order-of-operation errors\n\n**Topic you want to explore?**\n• Linear equations\n• Quadratics\n• Simultaneous equations\n• Inequalities\n• Sequences" },
+
+  { keys: ["calculus", "derivative", "integral", "differentiation"],
+    response: "📈 **Calculus Basics** (A-Level / Advanced)\n\n**Two main branches:**\n\n**1. Differentiation** (finding rates of change)\n\n**Power Rule:**\nIf y = xⁿ, then dy/dx = nxⁿ⁻¹\n\nExamples:\n• y = x³ → dy/dx = 3x²\n• y = 5x² → dy/dx = 10x\n• y = 7 → dy/dx = 0\n\n**Applications:**\n📉 Finding maximum/minimum points\n🚗 Velocity & acceleration\n📊 Marginal cost/revenue\n\n**2. Integration** (finding areas under curves)\n\n**Power Rule (reverse):**\n∫ xⁿ dx = xⁿ⁺¹/(n+1) + C\n\n**Fundamental Theorem:**\nDifferentiation and integration are inverse operations!\n\n**Exam tip:** Always add +C for indefinite integrals — examiners look for it!\n\nWhich topic do you want to dive deeper into?" },
+
+  { keys: ["statistics", "probability", "mean", "median", "mode"],
+    response: "📊 **Statistics Essentials**\n\n**Measures of Central Tendency:**\n\n📌 **Mean** (average) = Sum ÷ Count\nExample: (4+6+8+10)/4 = 7\n\n📌 **Median** (middle value)\nOrder data, find the middle\nExample: 2,4,**6**,8,10 → Median = 6\n\n📌 **Mode** (most frequent)\nExample: 3,5,5,7,5,9 → Mode = 5\n\n**Measures of Spread:**\n• **Range** = Max - Min\n• **Standard Deviation** = how spread out data is\n\n**Probability:**\nP(event) = Favorable outcomes / Total outcomes\n\n**Key rules:**\n• P(always) = 1\n• P(never) = 0\n• P(A or B) = P(A) + P(B) - P(A and B)\n• P(A and B independent) = P(A) × P(B)\n\n**Exam topics to master:**\n✅ Mean from frequency tables\n✅ Cumulative frequency\n✅ Box plots\n✅ Tree diagrams\n✅ Conditional probability\n\nWant practice problems on any of these?" },
+
+  // ── SCIENCES ──
+  { keys: ["half-life", "radioactive decay", "decay constant", "isotope"],
+    response: "⚛️ **Half-Life & Radioactive Decay**\n\n**Definition:** The time for half the radioactive nuclei in a sample to decay.\n\n**Formula:**\nN = N₀ × (1/2)^(t/t½)\n\nWhere:\n• N = amount remaining\n• N₀ = initial amount\n• t = time elapsed\n• t½ = half-life\n\n**Worked Example:**\n100g of Carbon-14 (t½ = 5,730 years)\n• After 5,730 yrs → 50g\n• After 11,460 yrs → 25g\n• After 17,190 yrs → 12.5g\n• After 22,920 yrs → 6.25g\n\n**Activity Formula:**\nA = λN where λ = ln(2)/t½\n\n**Types of Decay:**\n🔴 **Alpha (α):** ⁴He nucleus, stopped by paper\n **Beta (β):** High-energy electron, stopped by aluminum\n🔵 **Gamma (γ):** EM radiation, needs thick lead\n\n**Applications:**\n🏥 Medicine (radiotherapy, imaging)\n🌾 Agriculture (pest control, dating)\n⚡ Energy (nuclear power)\n📅 Archaeology (carbon dating)\n\n**Exam tip:** Always show working with the formula — don't just halve repeatedly!\n\nWant me to solve a specific problem?" },
+
+  { keys: ["photosynthesis", "chlorophyll", "light reaction", "calvin cycle"],
+    response: "🌿 **Photosynthesis — Complete Guide**\n\n**Overall equation:**\n6CO₂ + 6H₂O + light energy → C₆H₁₂O₆ + 6O₂\n\n**Where:** Chloroplasts (in mesophyll cells)\n\n**Two stages:**\n\n**🌞 Stage 1: Light-Dependent Reactions**\nLocation: Thylakoid membranes\n• Chlorophyll absorbs light\n• Water is split (photolysis): 2H₂O → 4H⁺ + 4e⁻ + O₂\n• Produces: ATP and NADPH\n• Oxygen released as byproduct\n\n**🌑 Stage 2: Light-Independent (Calvin Cycle)**\nLocation: Stroma\n• Uses ATP + NADPH from Stage 1\n• CO₂ fixed into glucose\n• Rubisco enzyme is key\n\n**Factors affecting rate:**\n☀️ Light intensity (increases until saturation)\n🌡️ Temperature (optimum ~25-35°C)\n💨 CO₂ concentration\n💧 Water availability\n\n**Adaptations:**\n🌵 Cacti: CAM photosynthesis (open stomata at night)\n🌾 C4 plants: Maize, sugarcane (efficient in heat)\n\n**Exam must-know:**\n✅ Limiting factors graph\n✅ Role of each photosystem\n✅ Difference between C3, C4, CAM\n\nWant me to explain any part in more detail?" },
+
+  { keys: ["cell", "mitosis", "meiosis", "organelle", "cytoplasm"],
+    response: "🧬 **Cell Biology — The Basics**\n\n**Cell Theory:**\n1. All living things are made of cells\n2. Cell is basic unit of life\n3. All cells come from existing cells\n\n**Animal vs Plant Cells:**\n\n| Feature | Animal | Plant |\n|---------|--------|-------|\n| Cell wall | ❌ | ✅ |\n| Chloroplasts | ❌ | ✅ |\n| Large vacuole | ❌ | ✅ |\n| Shape | Irregular | Fixed |\n\n**Key Organelles:**\n🔵 **Nucleus** — contains DNA, controls cell\n⚡ **Mitochondria** — produces ATP (energy)\n🏭 **Ribosomes** — protein synthesis\n📦 **Golgi apparatus** — packages proteins\n🧹 **Lysosomes** — digestion/waste removal\n\n**Mitosis** (growth & repair):\nProphase → Metaphase → Anaphase → Telophase\nResult: 2 identical diploid cells\n\n**Meiosis** (gamete production):\nTwo divisions → 4 unique haploid cells\nCreates genetic variation!\n\n**Exam tip:** Always label diagrams carefully — examiners give marks for clear labeling!\n\nWhich topic next?" },
+
+  { keys: ["newton", "laws of motion", "force", "acceleration", "inertia"],
+    response: "⚡ **Newton's Laws of Motion**\n\n**First Law (Inertia):**\nAn object at rest stays at rest, and an object in motion stays in motion at constant velocity, UNLESS acted upon by a net force.\n\n💡 Example: Seatbelts keep you moving with the car when it suddenly stops\n\n**Second Law:**\n**F = ma** (Force = mass × acceleration)\n\n💡 Example: Pushing an empty cart vs. full cart\n\n**Units:** Force in Newtons (N), mass in kg, acceleration in m/s²\n\n**Third Law:**\nFor every action, there is an EQUAL and OPPOSITE reaction.\n\n💡 Example: Rocket pushes gas down, gas pushes rocket up\n\n**Related concepts:**\n📌 **Weight:** W = mg (g = 9.8 m/s² on Earth)\n📌 **Momentum:** p = mv\n📌 **Impulse:** F × t = change in momentum\n\n**Common exam problems:**\n✅ Calculate acceleration given force & mass\n✅ Find resultant force from multiple forces\n✅ Explain using Newton's laws\n✅ Free-body diagrams\n\nWant me to solve a specific problem?" },
+
+  { keys: ["electricity", "circuit", "voltage", "current", "resistance", "ohm"],
+    response: "⚡ **Electricity & Circuits**\n\n**Key quantities:**\n• **Current (I)** — flow of charge, measured in Amperes (A)\n• **Voltage (V)** — potential difference, measured in Volts (V)\n• **Resistance (R)** — opposition to flow, in Ohms (Ω)\n\n**Ohm's Law:** V = IR\n\n**Power:** P = VI = I²R = V²/R\n\n**Series circuits:**\n• Same current throughout\n• Voltage splits: V_total = V₁ + V₂ + ...\n• Resistance adds: R_total = R₁ + R₂ + ...\n\n**Parallel circuits:**\n• Same voltage across each branch\n• Current splits: I_total = I₁ + I₂ + ...\n• 1/R_total = 1/R₁ + 1/R₂ + ...\n\n**Kirchhoff's Laws:**\n1. Current law: Total in = Total out at junction\n2. Voltage law: Sum of voltages in loop = 0\n\n**Exam tip:** Always draw the circuit first, label knowns, then apply formulas!\n\nWhat specific problem can I help with?" },
+
+  { keys: ["periodic table", "element", "atom structure", "proton", "electron"],
+    response: "⚗️ **Chemistry: Atomic Structure**\n\n**The Atom:**\n🔴 **Protons** (+) — in nucleus, define the element\n🔵 **Neutrons** (neutral) — in nucleus, add mass\n🟡 **Electrons** (-) — orbit in shells\n\n**Key numbers:**\n• **Atomic number (Z)** = number of protons\n• **Mass number (A)** = protons + neutrons\n• **Isotopes** = same Z, different A\n\n**Electronic configuration:**\n2, 8, 8, 18... (shells fill in order)\n\nExample: Sodium (Na, Z=11): 2,8,1\n\n**Periodic Table organization:**\n• **Groups** (columns) = same number of outer electrons = similar properties\n• **Periods** (rows) = same number of electron shells\n\n**Key groups:**\n• Group 1: Alkali metals (very reactive)\n• Group 7: Halogens\n• Group 8/0: Noble gases (unreactive)\n\n**Bonding types:**\n🔗 **Ionic** — metal + non-metal (transfer electrons)\n🔗 **Covalent** — non-metals (share electrons)\n🔗 **Metallic** — metal atoms (sea of electrons)\n\nWant me to go deeper on any topic?" },
+
+  { keys: ["organic chemistry", "hydrocarbon", "alkane", "alkene", "functional group"],
+    response: "🧪 **Organic Chemistry Basics**\n\n**Hydrocarbons** — compounds of C and H only\n\n**Alkanes** (saturated, single bonds):\n• General formula: CₙH₂ₙ₊₂\n• Examples: Methane (CH₄), Ethane (C₂H₆), Propane (C₃H₈)\n• Unreactive, burn cleanly\n\n**Alkenes** (unsaturated, C=C double bond):\n• General formula: CₙH₂ₙ\n• Examples: Ethene (C₂H₄), Propene (C₃H₆)\n• More reactive, used to make plastics\n\n**Test for unsaturation:**\nBromine water: Orange → Colorless (alkene) vs stays orange (alkane)\n\n**Functional groups:**\n🔹 **-OH** → Alcohols (ethanol)\n🔹 **-COOH** → Carboxylic acids (ethanoic acid)\n🔹 **-COO-** → Esters (sweet-smelling)\n\n**Important reactions:**\n• **Combustion:** Hydrocarbon + O₂ → CO₂ + H₂O\n• **Cracking:** Long chain → shorter alkanes + alkenes\n• **Polymerization:** Many monomers → polymer\n\n**Exam tip:** Always draw full structural formulas — show every bond!\n\nWhich organic topic next?" },
+
+  // ── HUMANITIES ──
+  { keys: ["history", "world war", "independence", "colonial", "scramble for africa"],
+    response: "📜 **History Essentials**\n\n**Major topics across curricula:**\n\n**🌍 Scramble for Africa (1884-1914):**\n• Berlin Conference divided Africa\n• European powers colonized with no African input\n• Motives: Resources, markets, prestige\n\n**🇰 Kenya's Path to Independence:**\n• 1895: British East Africa Protectorate\n• 1920: Kenya Colony established\n• 1952-1960: Mau Mau Uprising\n• 1963: Independence (Jomo Kenyatta)\n• 1964: Republic declared\n\n**⚔️ World War I (1914-1918):**\nCauses: MAIN (Militarism, Alliances, Imperialism, Nationalism)\nKey battles: Somme, Verdun\nResult: League of Nations formed\n\n**⚔️ World War II (1939-1945):**\nCauses: Treaty of Versailles, Hitler's expansion\nKey events: D-Day, Holocaust, atomic bombs\nResult: UN formed, Cold War begins\n\n**🌐 Cold War (1947-1991):**\nUSA (Capitalism) vs USSR (Communism)\nKey events: Berlin Wall, Cuban Missile Crisis, Space Race\nEnded with fall of Soviet Union\n\n**Study tip:** Create TIMELINES — history is easier to remember visually!\n\nWhich period interests you?" },
+
+  { keys: ["geography", "climate", "weather", "tectonic", "erosion"],
+    response: "🌍 **Geography Fundamentals**\n\n**Physical Geography:**\n\n🌋 **Plate Tectonics:**\n• Earth's crust = tectonic plates\n• Plates move → earthquakes, volcanoes, mountains\n• Types: Convergent, Divergent, Transform\n\n🌊 **Weathering & Erosion:**\n• Weathering = breakdown in place (physical, chemical, biological)\n• Erosion = movement by water, wind, ice\n• Deposition = dropping of material\n\n🌦️ **Climate:**\n• Kenya: Tropical (equatorial, highland, semi-arid)\n• UK: Temperate maritime\n• Factors: Latitude, altitude, ocean currents, distance from sea\n\n**Human Geography:**\n👥 **Population:** Growth, migration, density\n🏙️ **Urbanization:** Cities growing (Nairobi: 4M+ people)\n🌾 **Agriculture:** Subsistence vs commercial\n💰 **Development:** HDI, GDP, quality of life\n\n**Map skills (exam essential!):**\n✅ Grid references (4-figure & 6-figure)\n✅ Scale calculations\n✅ Contour interpretation\n✅ Cross-sections\n\n**KCSE/GCSE tip:** Always use specific examples and case studies in essay questions!\n\nWhich geography topic?" },
+
+  // ── LANGUAGES ──
+  { keys: ["french", "bonjour", "french language", "learn french"],
+    response: "🇫🇷 **French Language — Beginner's Guide**\n\n**Greetings:**\n• Bonjour = Hello (formal)\n• Salut = Hi (informal)\n• Bonsoir = Good evening\n• Au revoir = Goodbye\n• Merci = Thank you\n• S'il vous plaît = Please (formal)\n\n**Introducing yourself:**\n• Je m'appelle... = My name is...\n• Comment ça va? = How are you?\n• Ça va bien = I'm fine\n• J'ai ... ans = I am ... years old\n\n**Key grammar:**\n📌 French nouns have GENDER (masculine/feminine)\n• le/une = the (masc), la/une = the (fem)\n\n📌 Verb conjugation — example **être** (to be):\n• Je suis = I am\n• Tu es = You are\n• Il/Elle est = He/She is\n• Nous sommes = We are\n• Vous êtes = You are (formal/plural)\n• Ils/Elles sont = They are\n\n**Numbers 1-10:**\nun, deux, trois, quatre, cinq, six, sept, huit, neuf, dix\n\n**Tip:** Practice pronunciation daily — French sounds are very different from English!\n\nWant to learn more French phrases?" },
+
+  { keys: ["german", "hallo", "guten tag", "german language"],
+    response: "🇩🇪 **German Language — Starter Pack**\n\n**Essential phrases:**\n• Hallo = Hello\n• Guten Tag = Good day\n• Auf Wiedersehen = Goodbye\n• Danke = Thank you\n• Bitte = Please/You're welcome\n• Entschuldigung = Excuse me\n• Ja / Nein = Yes / No\n\n**Introductions:**\n• Ich heiße... = My name is...\n• Wie geht's? = How are you?\n• Mir geht es gut = I'm fine\n• Ich komme aus... = I come from...\n\n**Grammar basics:**\n📌 German has **3 genders**: der (masc), die (fem), das (neuter)\n📌 **Cases:** Nominative, Accusative, Dative, Genitive\n📌 **Word order:** Verb is ALWAYS second in main clauses\n\n**Numbers 1-10:**\neins, zwei, drei, vier, fünf, sechs, sieben, acht, neun, zehn\n\n**Unique feature:** Compound words!\n• Handschuh = hand + shoe = glove 🧤\n• Kühlschrank = cool + cupboard = refrigerator 🧊\n\n**Tip:** Learn the gender WITH each noun — it's crucial!\n\nMöchtest du mehr lernen? (Want to learn more?)" },
+
+  { keys: ["spanish", "hola", "spanish language"],
+    response: "🇪🇸 **Spanish Language — Essentials**\n\n**Greetings:**\n• ¡Hola! = Hello!\n• Buenos días = Good morning\n• Buenas tardes = Good afternoon\n• Buenas noches = Good night\n• Adiós = Goodbye\n• Gracias = Thank you\n• Por favor = Please\n\n**Introductions:**\n• Me llamo... = My name is...\n• ¿Cómo estás? = How are you?\n• Estoy bien = I'm fine\n• ¿De dónde eres? = Where are you from?\n• Soy de... = I'm from...\n\n**Grammar:**\n📌 Nouns have gender: el (masc), la (fem)\n📌 Plural: add -s or -es\n📌 Verbs conjugate by person\n\n**Ser vs Estar** (both mean 'to be'):\n• **Ser** = permanent (identity, origin, time)\n• **Estar** = temporary (location, feelings, conditions)\n\n**Numbers 1-10:**\nuno, dos, tres, cuatro, cinco, seis, siete, ocho, nueve, diez\n\n**Bonus:** Spanish is phonetic — words are pronounced as spelled!\n\n¿Quieres aprender más? (Want to learn more?)" },
+
+  { keys: ["mandarin", "chinese", "ni hao", "chinese language"],
+    response: "🇨🇳 **Mandarin Chinese — Getting Started**\n\n**Essential phrases:**\n• 你好 (Nǐ hǎo) = Hello\n• 谢谢 (Xièxiè) = Thank you\n• 再见 (Zàijiàn) = Goodbye\n• 对不起 (Duìbùqǐ) = Sorry\n• 没关系 (Méi guānxi) = It's okay\n• 是 / 不是 (Shì / Bù shì) = Yes / No\n\n**Introductions:**\n• 我叫... (Wǒ jiào...) = My name is...\n• 你好吗？(Nǐ hǎo ma?) = How are you?\n• 我很好 (Wǒ hěn hǎo) = I'm very good\n\n**Key features:**\n📌 **Tones** — 4 tones change meaning!\n  1st: flat (mā = mother)\n  2nd: rising (má = hemp)\n  3rd: dip (mǎ = horse)\n  4th: falling (mà = scold)\n\n📌 **Characters** — each represents a word/meaning\n📌 **No grammar conjugation** — verbs don't change!\n\n**Numbers 1-10:**\n一(yī), 二(èr), 三(sān), 四(sì), 五(wǔ), 六(liù), 七(qī), 八(bā), 九(jiǔ), 十(shí)\n\n**Tip:** Practice tones with audio — this is crucial for being understood!\n\nWant more Chinese phrases?" },
+
+  // ── CAREER & STUDY ──
+  { keys: ["career", "job", "future", "profession", "what should i become"],
+    response: "🚀 **Career Guidance — Find Your Path**\n\n**Start by asking yourself:**\n✅ What subjects do I enjoy most?\n✅ Am I more creative or analytical?\n✅ Do I prefer working with people or data?\n✅ What impact do I want to make?\n\n**High-demand careers in East Africa & globally:**\n\n💻 **Tech:** Software Developer, Data Scientist, AI Engineer\n⚕️ **Health:** Doctor, Nurse, Pharmacist, Lab Technician\n🏗️ **Engineering:** Civil, Electrical, Software, Environmental\n📚 **Education:** Teacher, Lecturer, Education Admin\n💼 **Business:** Accountant, Entrepreneur, Manager\n⚖️ **Law:** Lawyer, Judge, Legal Advisor\n🎨 **Creative:** Designer, Writer, Filmmaker\n🌱 **Agriculture:** Agronomist, Vet, Food Scientist\n\n**Steps to your career:**\n1. Explore interests (use our Career Pathways section!)\n2. Choose right subjects in Senior Secondary/A-Levels\n3. Research university programs\n4. Build skills through projects & internships\n5. Network & seek mentors\n\n**Salary ranges (USD):**\n• Doctor: $80k-$300k\n• Software Engineer: $70k-$180k\n• Teacher: $40k-$90k\n• Lawyer: $60k-$200k\n\nWant me to explore a specific career in detail?" },
+
+  { keys: ["study", "exam", "tip", "prepare", "kcse", "gcse", "revise", "revision"],
+    response: "📚 **Ultimate Study & Exam Guide**\n\n**Before the exam (weeks before):**\n✅ Create a revision timetable (balance subjects)\n✅ Use active recall — test yourself, don't just re-read\n✅ Spaced repetition — review at increasing intervals\n✅ Practice past papers under timed conditions\n✅ Teach concepts to someone else\n✅ Make mind maps for visual learners\n\n**The day before:**\n✅ Light review only — no cramming!\n✅ Prepare materials (pens, calculator, ID)\n✅ Sleep 7-8 hours\n✅ Eat well, stay hydrated\n\n**Exam day strategy:**\n⏱️ Read ALL questions first (5 min)\n📝 Start with easiest questions (build confidence)\n🎯 Allocate time per mark (e.g., 1.5 min per mark)\n✏️ Show ALL working — method marks matter!\n✅ Check answers if time allows\n\n**Subject-specific tips:**\n🔢 **Maths:** Show every step, check units\n🔬 **Sciences:** Use correct terminology, label diagrams\n📖 **English:** Plan essays, use quotes as evidence\n📜 **History:** Use PEEL (Point, Evidence, Explain, Link)\n\n**Mindset:**\n🧠 'I can learn this' vs 'I'm bad at this'\n🎯 Focus on progress, not perfection\n💪 Take breaks — your brain needs rest to consolidate!\n\nWhat subject do you need help with?" },
+
+  { keys: ["stress", "anxiety", "pressure", "overwhelmed", "mental health"],
+    response: "💙 **Managing Study Stress**\n\nFirst: It's NORMAL to feel stressed before exams. You're not alone!\n\n**Immediate relief:**\n🫁 **Box breathing:** Breathe in 4 counts, hold 4, out 4, hold 4. Repeat 4x.\n🚶 Take a 10-minute walk outside\n💧 Drink water, eat a healthy snack\n🎵 Listen to calming music for 5 minutes\n\n**Long-term strategies:**\n📅 **Plan ahead** — last-minute cramming causes most stress\n⏰ **Pomodoro technique:** 25 min study, 5 min break\n😴 **Sleep 7-9 hours** — non-negotiable for memory\n🏃 **Exercise regularly** — even 20 min helps\n🍎 **Eat brain food:** nuts, fish, berries, whole grains\n📱 **Limit social media** during study time\n\n**When to get help:**\n⚠️ Can't sleep for several nights\n⚠️ Loss of appetite\n⚠️ Panic attacks\n⚠️ Can't concentrate at all\n→ Talk to a teacher, parent, or counselor\n\n**Remember:**\n💭 One exam doesn't define your future\n💭 Progress > perfection\n💭 You've overcome challenges before — you can do this too!\n\nWant study tips for a specific subject?" },
+
+  // ── SUBJECT EXPLORERS ──
+  { keys: ["physics", "physics help", "physics topic"],
+    response: "⚡ **Physics — Complete Overview**\n\n**Core topics (all curricula):**\n\n🔹 **Mechanics:** Motion, forces, energy, momentum\n🔹 **Waves:** Light, sound, electromagnetic spectrum\n🔹 **Electricity:** Circuits, current, voltage, resistance\n🔹 **
 // ═══════════════════════════════════════════════════════════
 //  PAGE COMPONENTS
 // ═══════════════════════════════════════════════════════════
