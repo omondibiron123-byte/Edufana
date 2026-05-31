@@ -29,6 +29,13 @@ body{background:#f0f4f8;color:#1e293b}
 .avatar{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
 ::-webkit-scrollbar{width:5px}::-webkit-scrollbar-thumb{background:#94a3b8;border-radius:3px}
 .edu-pattern{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='%233b82f6' fill-opacity='0.03'%3E%3Cpath d='M40 10 L50 30 L40 25 L30 30 Z'/%3E%3Ccircle cx='15' cy='60' r='6'/%3E%3Crect x='55' y='50' width='15' height='20' rx='2'/%3E%3C/g%3E%3C/svg%3E")}
+.btmnav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:#fff;border-top:1px solid #e2e8f0;padding:4px 0;display:none}
+@media(max-width:640px){.btmnav{display:flex}.toplinks{display:none !important}}
+.breadcrumb{display:flex;align-items:center;gap:6px;font-size:13px;color:#64748b;margin-bottom:12px;flex-wrap:wrap}
+.breadcrumb a,.breadcrumb button{color:#2563eb;font-weight:500;cursor:pointer;background:none;border:none;padding:0;font-size:13px}
+.breadcrumb a:hover,.breadcrumb button:hover{text-decoration:underline}
+.search-box{position:relative}.search-box input{width:100%;padding:10px 14px 10px 40px;border:1px solid #e2e8f0;border-radius:12px;outline:none;font-size:14px;background:#f8fafc}
+.search-box input:focus{border-color:#3b82f6;box-shadow:0 0 0 3px rgba(59,130,246,.15)}.search-box svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:#94a3b8}
 </style>
 </head>
 <body class="edu-pattern">
@@ -39,7 +46,7 @@ body{background:#f0f4f8;color:#1e293b}
 // CBC · 8-4-4 · IB Baccalaureate · Foreign Languages
 // github.com/omondibiron123-byte/Edufana
 // ================================================================
-const V='2.0';
+const V='4.0';
 const C={admin:'omondibiron123-byte',adminPass:'admin2024',name:'EduFana',fee:30,share:70};
 
 // ─── CURRICULA DATABASE ───
@@ -136,56 +143,56 @@ const CAREERS=[
 // ─── LIBRARY ───
 const LIBRARY={
 cbc:[
-{title:'Our Lives Today - Social Studies Grade 4',author:'Oxford University Press',subject:'Social Studies',icon:'🌍',grade:'Grade 4'},
-{title:'Spotlight Science Grade 5',author:'Spotlight Publishers',subject:'Science & Technology',icon:'🔬',grade:'Grade 5'},
-{title:'Primary Mathematics Grade 6',author:'KLB',subject:'Mathematics',icon:'🔢',grade:'Grade 6'},
-{title:'Visually English Grade 7',author:'Longhorn',subject:'English',icon:'📖',grade:'Grade 7'},
-{title:'Kiswahili Sanifu Grade 8',author:'Oxford',subject:'Kiswahili',icon:'🗣️',grade:'Grade 8'},
-{title:'CBC ICT & Coding Grade 7',author:'Longhorn',subject:'ICT & Coding',icon:'💻',grade:'Grade 7'},
-{title:'Creative Arts Grade 5',author:'KLB',subject:'Creative Arts',icon:'🎨',grade:'Grade 5'},
-{title:'Agriculture & Nutrition Grade 6',author:'Spotlight',subject:'Agriculture',icon:'🌾',grade:'Grade 6'},
-{title:'Sarufi na Fasihi - Kiswahili Grade 9',author:'Moran Publishers',subject:'Kiswahili',icon:'📝',grade:'Grade 9'},
-{title:'Integrated Science Grade 8',author:'Longhorn',subject:'Science',icon:'🧪',grade:'Grade 8'},
+{title:'Our Lives Today - Social Studies Grade 4',author:'Oxford University Press',subject:'Social Studies',icon:'🌍',grade:'Grade 4',src:'https://www.google.com/search?tbm=bks&q=Our+Lives+Today+Social+Studies+Grade+4+Oxford'},
+{title:'Spotlight Science Grade 5',author:'Spotlight Publishers',subject:'Science & Technology',icon:'🔬',grade:'Grade 5',src:'https://www.google.com/search?tbm=bks&q=Spotlight+Science+Grade+5+Kenya'},
+{title:'Primary Mathematics Grade 6',author:'KLB',subject:'Mathematics',icon:'🔢',grade:'Grade 6',src:'https://www.google.com/search?tbm=bks&q=KLB+Primary+Mathematics+Grade+6'},
+{title:'Visually English Grade 7',author:'Longhorn',subject:'English',icon:'📖',grade:'Grade 7',src:'https://www.google.com/search?tbm=bks&q=Visually+English+Grade+7+Longhorn'},
+{title:'Kiswahili Sanifu Grade 8',author:'Oxford',subject:'Kiswahili',icon:'🗣️',grade:'Grade 8',src:'https://www.google.com/search?tbm=bks&q=Kiswahili+Sanifu+Grade+8'},
+{title:'CBC ICT & Coding Grade 7',author:'Longhorn',subject:'ICT & Coding',icon:'💻',grade:'Grade 7',src:'https://www.google.com/search?tbm=bks&q=CBC+ICT+Coding+Grade+7'},
+{title:'Creative Arts Grade 5',author:'KLB',subject:'Creative Arts',icon:'🎨',grade:'Grade 5',src:'https://www.google.com/search?tbm=bks&q=KLB+Creative+Arts+Grade+5'},
+{title:'Agriculture & Nutrition Grade 6',author:'Spotlight',subject:'Agriculture',icon:'🌾',grade:'Grade 6',src:'https://www.google.com/search?tbm=bks&q=Spotlight+Agriculture+Nutrition+Grade+6'},
+{title:'Sarufi na Fasihi - Kiswahili Grade 9',author:'Moran Publishers',subject:'Kiswahili',icon:'📝',grade:'Grade 9',src:'https://www.google.com/search?tbm=bks&q=Sarufi+na+Fasihi+Kiswahili+Grade+9'},
+{title:'Integrated Science Grade 8',author:'Longhorn',subject:'Science',icon:'🧪',grade:'Grade 8',src:'https://www.google.com/search?tbm=bks&q=Longhorn+Integrated+Science+Grade+8'},
 ],
 '844':[
-{title:'KLB Mathematics Form 1-4',author:'Kenya Literature Bureau',subject:'Mathematics',icon:'📐',grade:'Form 1-4'},
-{title:'KLB Biology Form 1-4',author:'KLB',subject:'Biology',icon:'🧬',grade:'Form 1-4'},
-{title:'KLB Chemistry Form 1-4',author:'KLB',subject:'Chemistry',icon:'⚗️',grade:'Form 1-4'},
-{title:'KLB Physics Form 1-4',author:'KLB',subject:'Physics',icon:'⚛️',grade:'Form 1-4'},
-{title:'A Doll\'s House — Henrik Ibsen',author:'Henrik Ibsen',subject:'English Literature',icon:'📚',grade:'Form 3-4'},
-{title:'The Pearl — John Steinbeck',author:'John Steinbeck',subject:'English Literature',icon:'📚',grade:'Form 1-2'},
-{title:'Blossoms of the Savannah',author:'Henry Ole Kulet',subject:'English Literature',icon:'📚',grade:'Form 3-4'},
-{title:'Chozi la Heri',author:'Assumpta K. Matei',subject:'Kiswahili Fasihi',icon:'📖',grade:'Form 3-4'},
-{title:'Kidagaa Kimemwozea',author:'Ken Walibora',subject:'Kiswahili Fasihi',icon:'📖',grade:'Form 1-2'},
-{title:'KLB History & Government Form 1-4',author:'KLB',subject:'History',icon:'🏛️',grade:'Form 1-4'},
-{title:'KLB Geography Form 1-4',author:'KLB',subject:'Geography',icon:'🗺️',grade:'Form 1-4'},
-{title:'Business Studies Simplified',author:'Longhorn',subject:'Business Studies',icon:'💼',grade:'Form 1-4'},
-{title:'Exploring CRE Form 1-4',author:'Oxford',subject:'CRE',icon:'🕊️',grade:'Form 1-4'},
-{title:'Computer Studies for Secondary',author:'KLB',subject:'Computer Studies',icon:'💻',grade:'Form 1-4'},
-{title:'KCSE Revision Series — All Subjects',author:'Kenya Literature Bureau',subject:'All',icon:'📝',grade:'Form 4'},
+{title:'KLB Mathematics Form 1-4',author:'Kenya Literature Bureau',subject:'Mathematics',icon:'📐',grade:'Form 1-4',src:'https://openlibrary.org/search?q=KLB+Mathematics+Kenya'},
+{title:'KLB Biology Form 1-4',author:'KLB',subject:'Biology',icon:'🧬',grade:'Form 1-4',src:'https://openlibrary.org/search?q=KLB+Biology+Kenya'},
+{title:'KLB Chemistry Form 1-4',author:'KLB',subject:'Chemistry',icon:'⚗️',grade:'Form 1-4',src:'https://openlibrary.org/search?q=KLB+Chemistry+Kenya'},
+{title:'KLB Physics Form 1-4',author:'KLB',subject:'Physics',icon:'⚛️',grade:'Form 1-4',src:'https://openlibrary.org/search?q=KLB+Physics+Kenya'},
+{title:'A Doll\'s House — Henrik Ibsen',author:'Henrik Ibsen',subject:'English Literature',icon:'📚',grade:'Form 3-4',src:'https://openlibrary.org/works/OL15264W/A_Dolls_House'},
+{title:'The Pearl — John Steinbeck',author:'John Steinbeck',subject:'English Literature',icon:'📚',grade:'Form 1-2',src:'https://openlibrary.org/works/OL23747W/The_Pearl'},
+{title:'Blossoms of the Savannah',author:'Henry Ole Kulet',subject:'English Literature',icon:'📚',grade:'Form 3-4',src:'https://openlibrary.org/search?q=Blossoms+of+the+Savannah'},
+{title:'Chozi la Heri',author:'Assumpta K. Matei',subject:'Kiswahili Fasihi',icon:'📖',grade:'Form 3-4',src:'https://www.google.com/search?tbm=bks&q=Chozi+la+Heri'},
+{title:'Kidagaa Kimemwozea',author:'Ken Walibora',subject:'Kiswahili Fasihi',icon:'📖',grade:'Form 1-2',src:'https://openlibrary.org/search?q=Kidagaa+Kimemwozea'},
+{title:'KLB History & Government Form 1-4',author:'KLB',subject:'History',icon:'🏛️',grade:'Form 1-4',src:'https://openlibrary.org/search?q=KLB+History+Government+Kenya'},
+{title:'KLB Geography Form 1-4',author:'KLB',subject:'Geography',icon:'🗺️',grade:'Form 1-4',src:'https://openlibrary.org/search?q=KLB+Geography+Kenya'},
+{title:'Business Studies Simplified',author:'Longhorn',subject:'Business Studies',icon:'💼',grade:'Form 1-4',src:'https://www.google.com/search?tbm=bks&q=Longhorn+Business+Studies+Kenya'},
+{title:'Exploring CRE Form 1-4',author:'Oxford',subject:'CRE',icon:'🕊️',grade:'Form 1-4',src:'https://www.google.com/search?tbm=bks&q=Exploring+CRE+Oxford+Kenya'},
+{title:'Computer Studies for Secondary',author:'KLB',subject:'Computer Studies',icon:'💻',grade:'Form 1-4',src:'https://openlibrary.org/search?q=KLB+Computer+Studies'},
+{title:'KCSE Revision Series — All Subjects',author:'Kenya Literature Bureau',subject:'All',icon:'📝',grade:'Form 4',src:'https://www.google.com/search?tbm=bks&q=KCSE+Revision+Kenya+Literature+Bureau'},
 ],
 ib:[
-{title:'Mathematics: Analysis & Approaches (HL)',author:'Oxford IB',subject:'Mathematics',icon:'∑',grade:'IB Diploma'},
-{title:'Biology for the IB Diploma',author:'Cambridge',subject:'Biology',icon:'🧬',grade:'IB Diploma'},
-{title:'Chemistry for the IB Diploma',author:'Pearson',subject:'Chemistry',icon:'⚗️',grade:'IB Diploma'},
-{title:'Physics for the IB Diploma',author:'Cambridge',subject:'Physics',icon:'⚛️',grade:'IB Diploma'},
-{title:'Economics for the IB Diploma',author:'Cambridge',subject:'Economics',icon:'📊',grade:'IB Diploma'},
-{title:'History for the IB Diploma',author:'Cambridge',subject:'History',icon:'🏛️',grade:'IB Diploma'},
-{title:'English A: Language & Literature',author:'Oxford IB',subject:'English',icon:'📚',grade:'IB Diploma'},
-{title:'French B for the IB Diploma',author:'Cambridge',subject:'French',icon:'🇫🇷',grade:'IB Diploma'},
-{title:'Spanish Ab Initio',author:'Pearson',subject:'Spanish',icon:'🇪🇸',grade:'IB Diploma'},
-{title:'Theory of Knowledge (TOK) Guide',author:'Oxford IB',subject:'TOK',icon:'💡',grade:'IB Diploma'},
-{title:'Extended Essay Guide',author:'IBO',subject:'EE',icon:'📝',grade:'IB Diploma'},
+{title:'Mathematics: Analysis & Approaches (HL)',author:'Oxford IB',subject:'Mathematics',icon:'∑',grade:'IB Diploma',src:'https://openlibrary.org/search?q=IB+Mathematics+Analysis+Approaches'},
+{title:'Biology for the IB Diploma',author:'Cambridge',subject:'Biology',icon:'🧬',grade:'IB Diploma',src:'https://openlibrary.org/search?q=Biology+IB+Diploma+Cambridge'},
+{title:'Chemistry for the IB Diploma',author:'Pearson',subject:'Chemistry',icon:'⚗️',grade:'IB Diploma',src:'https://openlibrary.org/search?q=Chemistry+IB+Diploma+Pearson'},
+{title:'Physics for the IB Diploma',author:'Cambridge',subject:'Physics',icon:'⚛️',grade:'IB Diploma',src:'https://openlibrary.org/search?q=Physics+IB+Diploma+Cambridge'},
+{title:'Economics for the IB Diploma',author:'Cambridge',subject:'Economics',icon:'📊',grade:'IB Diploma',src:'https://openlibrary.org/search?q=Economics+IB+Diploma'},
+{title:'History for the IB Diploma',author:'Cambridge',subject:'History',icon:'🏛️',grade:'IB Diploma',src:'https://openlibrary.org/search?q=History+IB+Diploma'},
+{title:'English A: Language & Literature',author:'Oxford IB',subject:'English',icon:'📚',grade:'IB Diploma',src:'https://openlibrary.org/search?q=English+Language+Literature+IB'},
+{title:'French B for the IB Diploma',author:'Cambridge',subject:'French',icon:'🇫🇷',grade:'IB Diploma',src:'https://openlibrary.org/search?q=French+B+IB+Diploma'},
+{title:'Spanish Ab Initio',author:'Pearson',subject:'Spanish',icon:'🇪🇸',grade:'IB Diploma',src:'https://openlibrary.org/search?q=Spanish+Ab+Initio+IB'},
+{title:'Theory of Knowledge (TOK) Guide',author:'Oxford IB',subject:'TOK',icon:'💡',grade:'IB Diploma',src:'https://openlibrary.org/search?q=Theory+of+Knowledge+IB'},
+{title:'Extended Essay Guide',author:'IBO',subject:'EE',icon:'📝',grade:'IB Diploma',src:'https://www.google.com/search?tbm=bks&q=IB+Extended+Essay+Guide'},
 ],
 general:[
-{title:'Sapiens — A Brief History of Humankind',author:'Yuval Noah Harari',subject:'General Knowledge',icon:'🌍',grade:'All'},
-{title:'A Short History of Nearly Everything',author:'Bill Bryson',subject:'Science',icon:'🔬',grade:'All'},
-{title:'The Art of Thinking Clearly',author:'Rolf Dobelli',subject:'Critical Thinking',icon:'🧠',grade:'All'},
-{title:'Atomic Habits',author:'James Clear',subject:'Self-Development',icon:'💪',grade:'All'},
-{title:'The Alchemist',author:'Paulo Coelho',subject:'Literature',icon:'📖',grade:'All'},
-{title:'Things Fall Apart',author:'Chinua Achebe',subject:'African Literature',icon:'📚',grade:'All'},
-{title:'Long Walk to Freedom',author:'Nelson Mandela',subject:'History',icon:'✊',grade:'All'},
-{title:'The Boy Who Harnessed the Wind',author:'William Kamkwamba',subject:'Inspiration',icon:'💡',grade:'All'},
+{title:'Sapiens — A Brief History of Humankind',author:'Yuval Noah Harari',subject:'General Knowledge',icon:'🌍',grade:'All',src:'https://openlibrary.org/works/OL17930368W/Sapiens'},
+{title:'A Short History of Nearly Everything',author:'Bill Bryson',subject:'Science',icon:'🔬',grade:'All',src:'https://openlibrary.org/works/OL28109W/A_Short_History_of_Nearly_Everything'},
+{title:'The Art of Thinking Clearly',author:'Rolf Dobelli',subject:'Critical Thinking',icon:'🧠',grade:'All',src:'https://openlibrary.org/search?q=Art+of+Thinking+Clearly'},
+{title:'Atomic Habits',author:'James Clear',subject:'Self-Development',icon:'💪',grade:'All',src:'https://openlibrary.org/works/OL20647044W/Atomic_Habits'},
+{title:'The Alchemist',author:'Paulo Coelho',subject:'Literature',icon:'📖',grade:'All',src:'https://openlibrary.org/works/OL15833824W/The_Alchemist'},
+{title:'Things Fall Apart',author:'Chinua Achebe',subject:'African Literature',icon:'📚',grade:'All',src:'https://openlibrary.org/works/OL714770W/Things_Fall_Apart'},
+{title:'Long Walk to Freedom',author:'Nelson Mandela',subject:'History',icon:'✊',grade:'All',src:'https://openlibrary.org/works/OL15137819W/Long_Walk_to_Freedom'},
+{title:'The Boy Who Harnessed the Wind',author:'William Kamkwamba',subject:'Inspiration',icon:'💡',grade:'All',src:'https://openlibrary.org/works/OL13780543W/The_Boy_Who_Harnessed_the_Wind'},
 ]};
 
 // ─── ADVENTURES ───
@@ -244,11 +251,43 @@ function seed(){if(D.g('_seeded').length)return;D.s('_seeded',[{id:'1'}]);D.s('u
 }
 
 // ─── HELPERS ───
+// ─── NAVIGATION HISTORY ───
+const NAV={history:[],idx:-1,
+push(p,d){this.history=this.history.slice(0,this.idx+1);this.history.push({p,d:d||null});this.idx=this.history.length-1},
+back(){if(this.idx>0){this.idx--;const h=this.history[this.idx];S.d.page=h.p;S.d.pd=h.d;window.scrollTo(0,0);render()}},
+fwd(){if(this.idx<this.history.length-1){this.idx++;const h=this.history[this.idx];S.d.page=h.p;S.d.pd=h.d;window.scrollTo(0,0);render()}},
+canBack(){return this.idx>0},canFwd(){return this.idx<this.history.length-1},
+label(p){const m={'landing':'Home','dash':'Dashboard','login':'Login','signup':'Sign Up','teacher-reg':'Teacher Registration','subjects':'Subjects','subject':'Subject','community':'Community','career':'Careers','ai':'AI Tutor','library':'Library','library-pub':'Library','adventures':'Adventures','adventures-pub':'Adventures','discoveries':'Discoveries','discoveries-pub':'Discoveries','motivational':'Motivation','motivational-pub':'Motivation','schools':'Schools','schools-auth':'Schools','curricula':'Curricula','careers-pub':'Careers','profile':'Profile','notifs':'Notifications','adash':'Admin Dashboard','ausers':'Users','aposts':'Posts','afin':'Finance','arev':'Reviews','anotifs':'Alerts','tdash':'Teacher Dashboard','tcourses':'My Courses','tearn':'Earnings'};return m[p]||p}
+};
+
 function toast(m,t='info'){const cl={info:'bg-blue-600',success:'bg-green-600',error:'bg-red-600',warning:'bg-yellow-500 text-gray-900'};const e=document.createElement('div');e.className=`toast ${cl[t]} text-white px-5 py-3 rounded-xl shadow-2xl text-sm font-medium max-w-sm`;e.innerHTML=`<span>${{success:'✅',error:'❌',warning:'⚠️',info:'ℹ️'}[t]||'ℹ️'}</span> ${m}`;document.body.appendChild(e);setTimeout(()=>{e.style.opacity='0';e.style.transition='opacity .3s';setTimeout(()=>e.remove(),300)},3500)}
-function go(p,d){S.set('page',p);if(d)S.set('pd',d);window.scrollTo(0,0);render()}
+function go(p,d){S.set('page',p);if(d)S.set('pd',d);NAV.push(p,d);window.scrollTo(0,0);render()}
 function stars(n){return '<span class="text-yellow-400">'+('★'.repeat(Math.floor(n)))+'</span><span class="text-gray-300">'+('★'.repeat(5-Math.floor(n)))+'</span>'}
 function timeAgo(d){const s=Math.floor((Date.now()-new Date(d))/1000);if(s<60)return'just now';if(s<3600)return Math.floor(s/60)+'m ago';if(s<86400)return Math.floor(s/3600)+'h ago';return Math.floor(s/86400)+'d ago'}
 function allSubjects(){const a=[];Object.values(CURRICULA).forEach(c=>c.subjects.forEach(s=>{if(!a.find(x=>x.name===s.name))a.push(s)}));return a}
+
+// Breadcrumb builder
+function crumb(items){
+return`<div class="breadcrumb fade">${NAV.canBack()?`<button onclick="NAV.back()" title="Go back" class="mr-1 text-lg hover:text-blue-700">←</button>`:''}${NAV.canFwd()?`<button onclick="NAV.fwd()" title="Go forward" class="mr-1 text-lg hover:text-blue-700">→</button>`:''}${items.map((it,i)=>i<items.length-1?`<button onclick="go('${it.page}'${it.data?`,${ JSON.stringify(it.data).replace(/"/g,"&quot;")}`:''})">${it.label}</button><span class="text-gray-300">/</span>`:`<span class="text-gray-900 font-semibold">${it.label}</span>`).join('')}</div>`}
+
+// Search bar component
+function searchBar(id,placeholder){
+return`<div class="search-box mb-6"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg><input id="${id}" type="text" placeholder="${placeholder}" oninput="handleSearch('${id}')"></div>`}
+
+// Bottom mobile nav for students
+function btmNav(){
+const p=S.get('page');
+return`<div class="btmnav">${[{p:'dash',i:'🏠',l:'Home'},{p:'subjects',i:'📚',l:'Subjects'},{p:'community',i:'💬',l:'Chat'},{p:'library',i:'📖',l:'Library'},{p:'ai',i:'🤖',l:'AI'}].map(n=>`<button onclick="go('${n.p}')" class="flex-1 flex flex-col items-center py-1.5 ${p===n.p?'text-blue-600':'text-gray-400'}"><span class="text-lg">${n.i}</span><span class="text-[10px] font-medium">${n.l}</span></button>`).join('')}</div>`}
+
+// Global search handler
+function handleSearch(id){
+const q=document.getElementById(id)?.value?.toLowerCase()||'';
+const results=document.querySelectorAll('[data-searchable]');
+results.forEach(el=>{
+const text=(el.getAttribute('data-searchable')||el.textContent).toLowerCase();
+el.style.display=text.includes(q)?'':'none';
+});
+}
 
 // ─── AI ENGINE ───
 const AI={
@@ -610,18 +649,20 @@ function pubNav(){return`<nav class="sticky top-0 z-50 bg-white/95 backdrop-blur
 function pgLibrary(){
 const u=S.get('user');const nav=u?'':pubNav();
 return`${nav}<div class="max-w-6xl mx-auto px-4 py-10 fade">
-<div class="text-center mb-10"><h1 class="text-3xl font-extrabold text-gray-900">📖 EduFana Digital Library</h1><p class="text-gray-500 mt-2">All recommended textbooks across CBC, 8-4-4, and IB curricula</p></div>
+${u?crumb([{label:'Home',page:'dash'},{label:'Library',page:'library'}]):''}
+<div class="text-center mb-6"><h1 class="text-3xl font-extrabold text-gray-900">📖 EduFana Digital Library</h1><p class="text-gray-500 mt-2">All recommended textbooks — click any book to find it online</p></div>
+${searchBar('lib-search','Search books by title, author, or subject...')}
 ${Object.entries(LIBRARY).map(([k,books])=>{
 const label={cbc:'🇰🇪 CBC Curriculum Books','844':'🇰🇪 8-4-4 / KCSE Books',ib:'🌍 IB / British Curriculum Books',general:'📚 General Knowledge & Inspiration'}[k]||k;
 return`<div class="mb-10"><h2 class="text-xl font-bold text-gray-900 mb-4">${label}</h2>
 <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-${books.map(b=>`<div class="card p-5 flex gap-4 items-start hover:border-blue-300">
-<div class="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center text-2xl flex-shrink-0">${b.icon}</div>
-<div class="min-w-0"><h3 class="font-bold text-gray-900 text-sm leading-tight">${b.title}</h3><p class="text-xs text-gray-500 mt-1">by ${b.author}</p><div class="flex gap-2 mt-2"><span class="tag bg-blue-100 text-blue-700">${b.subject}</span><span class="tag bg-gray-100 text-gray-600">${b.grade}</span></div></div>
-</div>`).join('')}
+${books.map(b=>`<a href="${b.src||'#'}" target="_blank" rel="noopener" data-searchable="${b.title} ${b.author} ${b.subject} ${b.grade}" class="card p-5 flex gap-4 items-start hover:border-blue-300 no-underline text-inherit group">
+<div class="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center text-2xl flex-shrink-0 group-hover:bg-blue-100 transition">${b.icon}</div>
+<div class="min-w-0"><h3 class="font-bold text-gray-900 text-sm leading-tight group-hover:text-blue-600 transition">${b.title}</h3><p class="text-xs text-gray-500 mt-1">by ${b.author}</p><div class="flex gap-2 mt-2"><span class="tag bg-blue-100 text-blue-700">${b.subject}</span><span class="tag bg-gray-100 text-gray-600">${b.grade}</span></div><p class="text-xs text-blue-500 mt-2 opacity-0 group-hover:opacity-100 transition">📥 Find this book online →</p></div>
+</a>`).join('')}
 </div></div>`}).join('')}
-${!u?'<div class="text-center mt-8"><button onclick="go(\'signup\')" class="px-8 py-3 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700 shadow-lg shadow-blue-200">Sign Up to Access Full Library →</button></div>':''}
-</div>`}
+${!u?`<div class="text-center mt-8"><button onclick="go('signup')" class="px-8 py-3 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700 shadow-lg shadow-blue-200">Sign Up to Access Full Library →</button></div>`:''}
+</div>${u?btmNav():''}`}
 
 // ── ADVENTURES PAGE ──
 function pgAdventures(){
@@ -643,7 +684,7 @@ ${a.img}
 <div class="mt-3 pt-3 border-t"><p class="text-xs"><span class="font-bold text-gray-700">📚 Related Subjects:</span> <span class="text-blue-600">${a.learn}</span></p></div>
 </div></div>`).join('')}
 </div>
-${!u?'<div class="text-center mt-10"><button onclick="go(\'signup\')" class="px-8 py-3 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700 shadow-lg shadow-blue-200">Sign Up to Explore More →</button></div>':''}
+${!u?`<div class="text-center mt-10"><button onclick="go('signup')" class="px-8 py-3 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700 shadow-lg shadow-blue-200">Sign Up to Explore More →</button></div>`:''}
 </div>`}
 
 // ── DISCOVERIES PAGE ──
@@ -705,7 +746,9 @@ const u=S.get('user');
 switch(p){
 case'subjects':
 const cur=CURRICULA[u.curriculum||'cbc'];
-return`<div class="max-w-6xl mx-auto px-4 py-8 fade"><h1 class="text-3xl font-extrabold mb-2">📚 My Subjects — ${cur.name}</h1><p class="text-gray-500 mb-6">Select a subject to browse lessons, join discussions, and study with AI.</p>
+return`<div class="max-w-6xl mx-auto px-4 py-8 pb-20 fade">
+${crumb([{label:'Home',page:'dash'},{label:'Subjects',page:'subjects'}])}
+<h1 class="text-3xl font-extrabold mb-2">📚 My Subjects — ${cur.name}</h1><p class="text-gray-500 mb-6">Select a subject to browse lessons, join discussions, and study with AI.</p>
 <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">${cur.subjects.map(s=>`<div onclick="go('subject',{name:'${s.name}',icon:'${s.icon}'})" class="card p-5 cursor-pointer flex items-center gap-4 hover:border-blue-300"><span class="text-3xl">${s.icon}</span><div><h3 class="font-bold text-gray-900 text-sm">${s.name}</h3><p class="text-xs text-gray-500">Tap to explore</p></div></div>`).join('')}</div>
 <div class="mt-8"><h2 class="text-lg font-bold text-gray-900 mb-3">Browse Other Curricula</h2><div class="flex gap-3">${Object.entries(CURRICULA).filter(([k])=>k!==(u.curriculum||'cbc')).map(([k,v])=>`<button onclick="switchCur('${k}')" class="px-4 py-2 bg-gray-100 rounded-xl text-sm font-medium hover:bg-gray-200 transition">${v.flag} ${v.name.split('(')[0]}</button>`).join('')}</div></div>
 </div>`;
@@ -714,7 +757,7 @@ case'subject':
 const sd=S.get('pd')||{};
 const posts=D.g('posts').filter(p=>p.subject===sd.name).sort((a,b)=>new Date(b.createdAt)-new Date(a.createdAt));
 return`<div class="max-w-4xl mx-auto px-4 py-8 fade">
-<button onclick="go('subjects')" class="text-blue-600 font-semibold mb-3 hover:underline text-sm">← All Subjects</button>
+${crumb([{label:'Home',page:'dash'},{label:'Subjects',page:'subjects'},{label:sd.name,page:'subject'}])}
 <div class="flex items-center gap-3 mb-6"><span class="text-4xl">${sd.icon}</span><div><h1 class="text-2xl font-extrabold text-gray-900">${sd.name}</h1><p class="text-gray-500 text-sm">Discussion · Questions · Resources</p></div></div>
 <!-- New Post -->
 <div class="card p-5 mb-6"><textarea id="newpost" rows="3" class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none bg-gray-50 text-sm" placeholder="Share a question, note, or resource about ${sd.name}..."></textarea><div class="flex justify-between items-center mt-3"><span class="text-xs text-gray-400">Be respectful · Help each other learn</span><button onclick="addPost('${sd.name}','${sd.icon}')" class="px-5 py-2 bg-blue-600 text-white rounded-xl font-semibold text-sm hover:bg-blue-700 transition">Post</button></div></div>
@@ -728,9 +771,18 @@ ${p.replies&&p.replies.length?`<div class="mt-3 pl-4 border-l-2 border-gray-200 
 
 case'community':
 const allPosts=D.g('posts').sort((a,b)=>new Date(b.createdAt)-new Date(a.createdAt));
-return`<div class="max-w-4xl mx-auto px-4 py-8 fade">
-<h1 class="text-3xl font-extrabold mb-2">💬 Community Feed</h1><p class="text-gray-500 mb-6">All discussions across subjects — ask, answer, and learn together.</p>
-${allPosts.length===0?'<div class="card p-12 text-center text-gray-400"><p class="text-5xl mb-3">🌱</p><p class="text-lg">The community is just getting started!</p><p class="text-sm mt-2">Go to a subject and make the first post.</p></div>':
+const postSubjects=[...new Set(allPosts.map(p=>p.subject))];
+const curUser=S.get('user');const curCur=CURRICULA[curUser.curriculum||'cbc'];
+return`<div class="max-w-5xl mx-auto px-4 py-8 fade">
+${crumb([{label:'Home',page:'dash'},{label:'Community',page:'community'}])}
+<h1 class="text-3xl font-extrabold mb-2">💬 Community Hub</h1><p class="text-gray-500 mb-4">Search discussions, join subject groups, ask and answer questions.</p>
+${searchBar('community-search','Search posts, questions, topics...')}
+
+<!-- Subject Discussion Groups -->
+<div class="mb-8"><h2 class="text-lg font-bold text-gray-900 mb-3">📚 Discussion Groups — tap a subject to join</h2>
+<div class="flex flex-wrap gap-2 mb-4">${curCur.subjects.map(s=>`<button onclick="go('subject',{name:'${s.name}',icon:'${s.icon}'})" class="tag ${s.color} hover:shadow cursor-pointer text-xs py-1.5 px-3">${s.icon} ${s.name.split('(')[0].split('/')[0].trim()}</button>`).join('')}</div>
+${postSubjects.length>0?`<div class="flex flex-wrap gap-2 mb-2"><span class="text-xs text-gray-500 mr-1">Active groups:</span>${postSubjects.map(s=>`<button onclick="go('subject',{name:'${s}',icon:'📝'})" class="tag bg-green-100 text-green-700 cursor-pointer hover:shadow">${s} (${allPosts.filter(p=>p.subject===s).length})</button>`).join('')}</div>`:''}</div>
+${allPosts.length===0?'<div class="card p-12 text-center text-gray-400"><p class="text-5xl mb-3">🌱</p><p class="text-lg">The community is just getting started!</p><p class="text-sm mt-2">Go to a subject and make the first post.</p></div>'+btmNav():
 allPosts.slice(0,20).map(p=>`<div class="card p-5 mb-4"><div class="flex items-start gap-3"><div class="avatar bg-blue-100 text-blue-600">${(p.authorName||'?')[0]}</div><div class="flex-1"><div class="flex items-center gap-2 flex-wrap"><span class="font-semibold text-sm">${p.authorName}</span><span class="tag ${CURRICULA.cbc.subjects.find(s=>s.name===p.subject)?.color||'bg-gray-100 text-gray-600'}">${p.subjectIcon||'📝'} ${p.subject}</span><span class="text-xs text-gray-400">${timeAgo(p.createdAt)}</span></div><p class="text-gray-700 text-sm mt-2 whitespace-pre-wrap">${p.content}</p>
 ${p.replies&&p.replies.length?`<p class="text-xs text-blue-600 font-medium mt-2 cursor-pointer" onclick="go('subject',{name:'${p.subject}',icon:'${p.subjectIcon||'📝'}'})">💬 ${p.replies.length} replies — view in subject</p>`:''}
 <div class="flex gap-3 mt-2"><button onclick="likePost('${p.id}')" class="text-xs text-gray-500 hover:text-red-500">❤️ ${p.likes||0}</button></div></div></div></div>`).join('')}
@@ -744,7 +796,7 @@ case'discoveries':return pgDiscoveries();
 case'motivational':return pgMotivational();
 
 case'ai':
-return`<div class="max-w-3xl mx-auto px-4 py-8 fade"><div class="flex items-center gap-3 mb-2"><div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center text-2xl text-white shadow-lg">🤖</div><div><h1 class="text-2xl font-extrabold">EduFana AI Tutor</h1><p class="text-gray-500 text-sm">Trained on CBC, 8-4-4 & IB · All subjects · Step-by-step answers</p></div></div>
+return`<div class="max-w-3xl mx-auto px-4 py-8 pb-20 fade">${crumb([{label:'Home',page:'dash'},{label:'AI Tutor',page:'ai'}])}<div class="flex items-center gap-3 mb-2"><div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center text-2xl text-white shadow-lg">🤖</div><div><h1 class="text-2xl font-extrabold">EduFana AI Tutor</h1><p class="text-gray-500 text-sm">Trained on CBC, 8-4-4 & IB · All subjects · Step-by-step answers</p></div></div>
 <div class="flex flex-wrap gap-2 mb-4">${['Solve equations','Explain photosynthesis','French basics','KCSE tips','Career advice','Cell biology'].map(s=>`<button onclick="document.getElementById('aim').value='${s}';aiChat()" class="px-3 py-1.5 bg-blue-50 text-blue-600 rounded-full text-xs font-medium hover:bg-blue-100 transition border border-blue-200">${s}</button>`).join('')}</div>
 <div id="chat" class="card p-5 min-h-[380px] max-h-[520px] overflow-y-auto space-y-4 mb-4">
 <div class="flex gap-3"><div class="avatar bg-gradient-to-br from-blue-500 to-purple-600 text-white">🤖</div><div class="bg-blue-50 rounded-2xl rounded-tl-none p-4 flex-1 text-sm text-gray-700"><p class="font-bold text-blue-800 mb-2">Hello! I'm your EduFana AI Tutor 👋</p><p>I give <b>detailed, step-by-step explanations</b> like a real teacher — with formulas, examples, and exam tips.</p><p class="mt-3 font-medium text-gray-800">Try asking me:</p><div class="mt-2 space-y-1.5 text-gray-600"><p>📐 "How do I solve quadratic equations?"</p><p>🧬 "Explain genetics and Punnett squares"</p><p>🇫🇷 "Teach me French verb conjugation"</p><p>📝 "How should I prepare for KCSE?"</p><p>💼 "What career can I do with Maths & Physics?"</p><p>🧪 "Explain acids, bases and pH"</p></div><p class="mt-3 text-xs text-gray-400">I cover 50+ subjects across all 3 curricula. Ask anything!</p></div></div>
@@ -760,7 +812,7 @@ return`<div class="max-w-3xl mx-auto px-4 py-8 fade"><h1 class="text-3xl font-ex
 
 default: // dashboard
 const cur2=CURRICULA[u.curriculum||'cbc'];
-return`<div class="max-w-7xl mx-auto px-4 py-8 fade">
+return`<div class="max-w-7xl mx-auto px-4 py-8 pb-20 fade">
 <div class="bg-gradient-to-r from-blue-600 via-blue-700 to-purple-700 rounded-2xl text-white p-7 mb-8 relative overflow-hidden"><div class="absolute top-0 right-0 w-40 h-40 bg-white/5 rounded-full -mr-10 -mt-10"></div><div class="relative z-10"><h1 class="text-3xl font-bold mb-1">Welcome, ${u.name}! 👋</h1><p class="text-blue-100 text-sm">Curriculum: <b>${cur2.name}</b> · Plan: <b class="capitalize">${u.plan||'free'}</b></p><p class="text-blue-200 text-sm mt-2">Start by exploring your subjects, joining community discussions, or asking the AI tutor.</p></div></div>
 <div class="grid grid-cols-3 md:grid-cols-6 gap-3 mb-8">${[{p:'subjects',i:'📚',t:'Subjects',c:'from-blue-50 to-blue-100'},{p:'library',i:'📖',t:'Library',c:'from-amber-50 to-amber-100'},{p:'adventures',i:'🌍',t:'Adventures',c:'from-cyan-50 to-cyan-100'},{p:'community',i:'💬',t:'Community',c:'from-green-50 to-green-100'},{p:'career',i:'💼',t:'Careers',c:'from-purple-50 to-purple-100'},{p:'ai',i:'🤖',t:'AI Tutor',c:'from-yellow-50 to-yellow-100'}].map(a=>`<button onclick="go('${a.p}')" class="bg-gradient-to-br ${a.c} p-5 rounded-xl text-center transition hover:shadow-lg group"><div class="text-3xl mb-2 group-hover:scale-110 transition">${a.i}</div><p class="font-semibold text-gray-900 text-sm">${a.t}</p></button>`).join('')}</div>
 <div class="grid md:grid-cols-2 gap-6">
@@ -780,7 +832,7 @@ return`<div class="max-w-7xl mx-auto px-4 py-8 fade">
 <div class="text-center py-4"><div class="text-4xl mb-3">${MOTIVATIONAL[Math.floor(Math.random()*MOTIVATIONAL.length)].img}</div><blockquote class="text-gray-700 italic">"${MOTIVATIONAL[Math.floor(Math.random()*MOTIVATIONAL.length)].quote}"</blockquote><p class="mt-3 font-bold text-gray-900 text-sm">— ${MOTIVATIONAL[Math.floor(Math.random()*MOTIVATIONAL.length)].speaker}</p></div>
 <p class="text-blue-600 text-sm font-semibold text-center">More inspiration →</p>
 </div>
-</div></div>`;
+</div></div>${btmNav()}`;
 }}
 
 // ══════════════════════════════════════
@@ -870,6 +922,8 @@ const delay=Math.min(400+reply.length*2,2000);
 setTimeout(()=>{const te=document.getElementById(typingId);if(te)te.remove();ch.innerHTML+=`<div class="flex gap-3 fade"><div class="avatar bg-gradient-to-br from-blue-500 to-purple-600 text-white w-8 h-8 text-xs flex-shrink-0">🤖</div><div class="bg-blue-50 border border-blue-100 rounded-2xl rounded-tl-none p-4 flex-1 text-sm text-gray-700 leading-relaxed whitespace-pre-line">${reply}</div></div>`;ch.scrollTop=ch.scrollHeight},delay)}
 
 // ═══ INIT ═══
+// Clear old data if version changed
+try{const ov=localStorage.getItem('ef2_ver');if(ov!==V){localStorage.clear();localStorage.setItem('ef2_ver',V)}}catch(e){}
 S.ld();seed();render();
 </script>
 </body>
